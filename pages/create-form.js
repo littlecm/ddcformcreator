@@ -58,10 +58,4 @@ export default function CreateForm() {
       </form>
       {script && (
         <div className="mt-4">
-          <h2 className="text-xl font-bold">Embed Code</h2>
-          <textarea readOnly value={script} className="w-full border rounded p-2" />
-        </div>
-      )}
-    </div>
-  );
-}
+          <h2 className
