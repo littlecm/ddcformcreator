@@ -1,11 +1,10 @@
 // pages/_app.js
-import '@/styles/globals.css';
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import '../styles/globals.css';
+import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ClerkProvider {...pageProps}>
+    <ClerkProvider>
       <header className="p-4 bg-gray-100 flex justify-between items-center">
         <h1 className="text-xl font-bold">Dealership Forms</h1>
         <div>
