@@ -1,8 +1,8 @@
 // pages/create-form.js
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useUser } from '@clerk/nextjs';
 
 export default function CreateForm() {
   const { register, handleSubmit } = useForm();
@@ -10,6 +10,7 @@ export default function CreateForm() {
   const [formId, setFormId] = useState(null);
   const [webhookUrl, setWebhookUrl] = useState('');
   const [script, setScript] = useState('');
+  const { user } = useUser();
 
   const addField = () => {
     setFields([...fields, { name: '', type: 'text' }]);
@@ -19,6 +20,7 @@ export default function CreateForm() {
     const response = await axios.post('/api/forms', {
       fields: data.fields,
       webhookUrl: data.webhookUrl,
+      userId: user.id, // Pass user ID
     });
     setFormId(response.data.formId);
     setScript(`<script src="${window.location.origin}/api/form/${response.data.formId}/embed.js"></script>`);
