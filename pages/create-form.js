@@ -27,37 +27,39 @@ export default function CreateForm() {
   };
 
   return (
-    <div>
-      <h1>Create a New Form</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Create a New Form</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {fields.map((field, index) => (
-          <div key={index}>
+          <div key={index} className="flex space-x-2">
             <input
               {...register(`fields[${index}].name`)}
               placeholder="Field Name"
+              className="border rounded p-2 flex-1"
               required
             />
-            <select {...register(`fields[${index}].type`)} defaultValue="text">
+            <select {...register(`fields[${index}].type`)} className="border rounded p-2">
               <option value="text">Text</option>
               <option value="email">Email</option>
               <option value="number">Number</option>
             </select>
           </div>
         ))}
-        <button type="button" onClick={addField}>Add Field</button>
+        <button type="button" onClick={addField} className="bg-blue-500 text-white p-2 rounded">Add Field</button>
         <input
           {...register('webhookUrl')}
           placeholder="Webhook URL"
           value={webhookUrl}
           onChange={(e) => setWebhookUrl(e.target.value)}
+          className="border rounded p-2 w-full"
           required
         />
-        <button type="submit">Create Form</button>
+        <button type="submit" className="bg-green-500 text-white p-2 rounded">Create Form</button>
       </form>
       {script && (
-        <div>
-          <h2>Embed Code</h2>
-          <textarea readOnly value={script} />
+        <div className="mt-4">
+          <h2 className="text-xl font-bold">Embed Code</h2>
+          <textarea readOnly value={script} className="w-full border rounded p-2" />
         </div>
       )}
     </div>
