@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "mkdir -p data && next build",
     "start": "next start"
   },
- "dependencies": {
+  "dependencies": {
     "axios": "^0.24.0",
     "next": "14.0.0",
     "react": "^18.0.0",
