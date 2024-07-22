@@ -1,8 +1,7 @@
 // pages/dashboard.js
 import { useEffect, useState } from 'react';
-import fs from 'fs';
-import path from 'path';
-import { useUser } from '@clerk/nextjs';
+import { useUser, withServerSideAuth } from '@clerk/nextjs';
+import axios from 'axios';
 
 export default function Dashboard() {
   const [forms, setForms] = useState([]);
@@ -10,9 +9,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function fetchForms() {
-      const response = await fetch('/api/forms');
-      const data = await response.json();
-      setForms(data);
+      const response = await axios.get('/api/forms');
+      setForms(response.data);
     }
     fetchForms();
   }, []);
@@ -50,7 +48,9 @@ export default function Dashboard() {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps = withServerSideAuth(async (ctx) => {
+  const fs = require('fs');
+  const path = require('path');
   const dataDirectory = path.join(process.cwd(), 'data');
   const files = fs.readdirSync(dataDirectory);
   const forms = files.map(file => {
@@ -61,7 +61,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      forms,
+      initialForms: forms,
     },
   };
-}
+});
