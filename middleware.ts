@@ -1,5 +1,4 @@
-// middleware.ts
-import { clerkMiddleware } from "@clerk/nextjs/ssr";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
 export default clerkMiddleware();
 
